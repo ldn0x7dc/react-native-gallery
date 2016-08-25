@@ -21,7 +21,8 @@ export default class Gallery extends Component {
     onPageScroll: PropTypes.func,
 
     onSingleTapConfirmed: PropTypes.func,
-    onGalleryStateChanged: PropTypes.func
+    onGalleryStateChanged: PropTypes.func,
+    minScale: PropTypes.number
   };
 
   imageRefs = new Map();
@@ -219,7 +220,7 @@ export default class Gallery extends Component {
   }
 
   renderPage(pageData, pageId, layout) {
-    const { onViewTransformed, onTransformGestureReleased, ...other } = this.props;
+    const { onViewTransformed, onTransformGestureReleased, minScale , ...other } = this.props;
     return (
       <Image
         {...other}
@@ -233,6 +234,7 @@ export default class Gallery extends Component {
            this.imageRefs.set(pageId, ref);
         }).bind(this)}
         key={'innerImage#' + pageId}
+        minScale={minScale}
         style={{width: layout.width, height: layout.height}}
         source={{uri: pageData}}/>
     );
