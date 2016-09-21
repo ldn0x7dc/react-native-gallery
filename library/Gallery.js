@@ -218,8 +218,19 @@ export default class Gallery extends Component {
     this.props.onPageScroll && this.props.onPageScroll(e);
   }
 
+  setImageRef(pageId, ref) {
+    this.imageRefs.set(pageId, ref);
+  }
+
+  deleteImageRef(pageId) {
+    this.imageRefs.delete(`${pageId}`);
+  }
+
   renderPage(pageData, pageId, layout) {
-    const { onViewTransformed, onTransformGestureReleased, ...other } = this.props;
+    const { onViewTransformed, onTransformGestureReleased, customItem, ...other } = this.props;
+    if (customItem && typeof customItem === 'function') {
+      return customItem(pageData, pageId, layout, this);
+    };
     return (
       <Image
         {...other}
