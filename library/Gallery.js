@@ -1,11 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import {
-  View
-} from 'react-native';
-
+import { View, StyleSheet } from 'react-native';
 import Image from 'react-native-transformable-image';
 import ViewPager from '@ldn0x7dc/react-native-view-pager';
-import {createResponder} from 'react-native-gesture-responder';
+import { createResponder } from 'react-native-gesture-responder';
 
 
 export default class Gallery extends Component {
@@ -16,6 +13,8 @@ export default class Gallery extends Component {
 
     initialPage: PropTypes.number,
     pageMargin: PropTypes.number,
+    renderLoading: PropTypes.func,
+    renderError: PropTypes.func,
     onPageSelected: PropTypes.func,
     onPageScrollStateChanged: PropTypes.func,
     onPageScroll: PropTypes.func,
@@ -30,6 +29,8 @@ export default class Gallery extends Component {
   currentPage = 0;
   pageCount = 0;
   gestureResponder = undefined;
+
+  state = { status: {} };
 
   constructor(props) {
     super(props);
@@ -219,23 +220,45 @@ export default class Gallery extends Component {
   }
 
   renderPage(pageData, pageId, layout) {
-    const { onViewTransformed, onTransformGestureReleased, ...other } = this.props;
+    const {
+      onViewTransformed, onTransformGestureReleased, renderLoading, renderError,
+      ...other
+    } = this.props;
+
     return (
-      <Image
-        {...other}
-        onViewTransformed={((transform) => {
-           onViewTransformed && onViewTransformed(transform, pageId);
-        }).bind(this)}
-        onTransformGestureReleased={((transform) => {
-           onTransformGestureReleased && onTransformGestureReleased(transform, pageId);
-        }).bind(this)}
-        ref={((ref) => {
-           this.imageRefs.set(pageId, ref);
-        }).bind(this)}
-        key={'innerImage#' + pageId}
-        style={{width: layout.width, height: layout.height}}
-        source={{uri: pageData}}/>
+      <View>
+        {renderLoading && !this.state.status[pageId] &&
+          <View style={Style.underlay}>{renderLoading()}</View>}
+
+        {renderError && this.state.status[pageId] === 'error' &&
+          <View style={Style.underlay}>{renderError()}</View>}
+
+        <Image
+          {...other}
+          onViewTransformed={((transform) => {
+             onViewTransformed && onViewTransformed(transform, pageId);
+          }).bind(this)}
+          onTransformGestureReleased={((transform) => {
+             onTransformGestureReleased && onTransformGestureReleased(transform, pageId);
+          }).bind(this)}
+          ref={((ref) => {
+             this.imageRefs.set(pageId, ref);
+          }).bind(this)}
+          key={'innerImage#' + pageId}
+          style={{width: layout.width, height: layout.height}}
+          source={{uri: pageData}}
+          onLoad={this.setLoadedStatus.bind(this, pageId)}
+          onError={this.setErrorStatus.bind(this, pageId)}/>
+      </View>
     );
+  }
+
+  setLoadedStatus(pageId){
+    this.setState({status: {...this.state.status, [pageId]: 'loaded'}});
+  }
+
+  setErrorStatus(pageId){
+    this.setState({status: {...this.state.status, [pageId]: 'error'}});
   }
 
   resetHistoryImageTransform() {
@@ -250,3 +273,16 @@ export default class Gallery extends Component {
     }
   }
 }
+
+
+const Style = StyleSheet.create({
+  underlay: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+});
