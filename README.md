@@ -49,6 +49,8 @@ This component utilizes **[@ldn0x7dc/react-native-view-pager](https://github.com
 * **initialPage**, **pageMargin**, **onPageSelected**, **onPageScrollStateChanged**, **onPageScroll**: inherited from **[@ldn0x7dc/react-native-view-pager](https://github.com/ldn0x7dc/react-native-view-pager)**. Check the link for more details.
 * **onSingleTapConfirmed**: Called after user single taped( not a double tap)
 * **onGalleryStateChanged**: function. (idle) => {}.
+* **renderLoading**: (optional) function to render anything while the image loads (e.g. a spinner).
+* **renderError**: (optional) function to render anything if the image fails to load (e.g. an error message).
 
 
 
