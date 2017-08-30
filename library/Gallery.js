@@ -234,7 +234,7 @@ export default class Gallery extends Component {
         }).bind(this)}
         key={'innerImage#' + pageId}
         style={{width: layout.width, height: layout.height}}
-        source={{uri: pageData}}/>
+        source={pageData}/>
     );
   }
 
