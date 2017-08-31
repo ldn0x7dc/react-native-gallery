@@ -7,8 +7,6 @@ This component aims to be (one of ) the best image viewer for react-native apps.
 * Gesture handle: besides common pan, pinch and doubleTap, this component does well in targeting foucs point( or pivot) when zoom-in and zoom-out.
 * Responder switch: the gesture responder switch is more flexible than any other component, that is, the scrollable container and the wrapped image children perform well in acquiring and releasing gesture responder from/to each other.
 
-This component works on react-native **0.28+** and only supports remote images for now.
-
 ![](Demo/demo.gif)
 
 
@@ -23,19 +21,21 @@ This component works on react-native **0.28+** and only supports remote images f
 
 Quite easy to use:
 
-```
+```js
 import Gallery from 'react-native-gallery';
 ...
 
   render() {
+    const images = [
+      { uri: 'http://p10.qhimg.com/t019e9cf51692f735be.jpg' },
+      { uri: 'http://ww2.sinaimg.cn/mw690/714a59a7tw1dxqkkg0cwlj.jpg' },
+      { uri: 'http://www.bz55.com/uploads/allimg/150122/139-150122145421.jpg'},
+    ];
+
     return (
       <Gallery
         style={{flex: 1, backgroundColor: 'black'}}
-        images={[
-          'http://p10.qhimg.com/t019e9cf51692f735be.jpg',
-          'http://ww2.sinaimg.cn/mw690/714a59a7tw1dxqkkg0cwlj.jpg',
-          'http://www.bz55.com/uploads/allimg/150122/139-150122145421.jpg'
-        ]}
+        images={images}
       />
     );
   }
@@ -45,7 +45,7 @@ This component utilizes **[@ldn0x7dc/react-native-view-pager](https://github.com
 
 #### Props
 
-* **images**: array, contains image urls
+* **images**: array, contains image sources or objects with image uri. Same as react-native `Image`.
 * **initialPage**, **pageMargin**, **onPageSelected**, **onPageScrollStateChanged**, **onPageScroll**: inherited from **[@ldn0x7dc/react-native-view-pager](https://github.com/ldn0x7dc/react-native-view-pager)**. Check the link for more details.
 * **onSingleTapConfirmed**: Called after user single taped( not a double tap)
 * **onGalleryStateChanged**: function. (idle) => {}.
