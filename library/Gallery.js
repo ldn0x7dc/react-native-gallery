@@ -1,8 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import {
-  View
-} from 'react-native';
-
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { View } from 'react-native';
 import Image from 'react-native-transformable-image';
 import ViewPager from '@ldn0x7dc/react-native-view-pager';
 import {createResponder} from 'react-native-gesture-responder';
