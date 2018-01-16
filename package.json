@@ -17,8 +17,9 @@
   },
   "homepage": "https://github.com/ldn0x7dc/react-native-gallery#readme",
   "dependencies": {
-    "react-native-transformable-image": "0.0.18",
     "@ldn0x7dc/react-native-view-pager": "0.0.9",
-    "react-native-gesture-responder": "0.1.1"
+    "prop-types": "^15.6.0",
+    "react-native-gesture-responder": "0.1.1",
+    "react-native-transformable-image": "0.0.18"
   }
 }
