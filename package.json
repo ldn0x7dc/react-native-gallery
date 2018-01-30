@@ -1,6 +1,6 @@
 {
-  "name": "@borgand/react-native-gallery",
-  "version": "0.0.18",
+  "name": "react-native-gallery",
+  "version": "0.0.19",
   "description": "",
   "main": "library/Gallery.js",
   "scripts": {
