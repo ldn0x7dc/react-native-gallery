@@ -17,9 +17,9 @@
   },
   "homepage": "https://github.com/borgand/react-native-gallery#readme",
   "dependencies": {
-    "react-native-view-pager": "github:borgand/react-native-view-pager",
     "prop-types": "^15.6.0",
     "react-native-gesture-responder": "0.1.1",
-    "react-native-transformable-image": "github:borgand/react-native-transformable-image"
+    "react-native-transformable-image": "github:borgand/react-native-transformable-image#064c085",
+    "react-native-view-pager": "github:borgand/react-native-view-pager#496bf58"
   }
 }
