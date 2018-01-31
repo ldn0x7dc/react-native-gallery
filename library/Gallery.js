@@ -1,17 +1,19 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import {
-  View
+  View,
+  ViewPropTypes
 } from 'react-native';
 
 import Image from 'react-native-transformable-image';
-import ViewPager from '@ldn0x7dc/react-native-view-pager';
+import ViewPager from 'react-native-view-pager';
 import {createResponder} from 'react-native-gesture-responder';
 
 
 export default class Gallery extends Component {
 
   static propTypes = {
-    ...View.propTypes,
+    ...ViewPropTypes,
     images: PropTypes.array,
 
     initialPage: PropTypes.number,
